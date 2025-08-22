@@ -91,6 +91,14 @@ class LinkedList:
 
         return temp
 
+    def set_value(self, index, value):
+        temp = self.get(index)
+        if temp:
+            temp.value = value
+            return True
+
+        return False
+
 
 my_linked_list = LinkedList()
 
@@ -136,3 +144,6 @@ my_linked_list.print_list()
 
 print('Pop first: ', my_linked_list.pop_first().value)
 print('Get at #1: ', my_linked_list.get(1).value)
+
+my_linked_list.set_value(0, 6)
+my_linked_list.print_list()
