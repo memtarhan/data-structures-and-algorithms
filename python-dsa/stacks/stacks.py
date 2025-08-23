@@ -27,6 +27,17 @@ class Stack:
 
         self.height += 1
 
+    def pop(self):
+        if self.height == 0:
+            return None
+
+        temp = self.top
+        self.top = temp.next
+        temp.next = None
+        self.height -= 1
+
+        return temp
+
 
 my_stack = Stack(4)
 
@@ -51,8 +62,6 @@ my_stack.push(1)
 print('\nStack after push(1):')
 my_stack.print_stack()
 
-
-
 """
     EXPECTED OUTPUT:
     ----------------
@@ -62,5 +71,40 @@ my_stack.print_stack()
     Stack after push(1):
     1
     2   
+
+"""
+
+my_stack = Stack(4)
+my_stack.push(3)
+my_stack.push(2)
+my_stack.push(1)
+
+print('Stack before pop():')
+my_stack.print_stack()
+
+print('\nPopped node:')
+print(my_stack.pop().value)
+
+print('\nStack after pop():')
+my_stack.print_stack()
+
+
+
+"""
+    EXPECTED OUTPUT:
+    ----------------
+    Stack before pop():
+    1
+    2
+    3
+    4
+
+    Popped node:
+    1
+
+    Stack after pop():
+    2
+    3
+    4
 
 """
