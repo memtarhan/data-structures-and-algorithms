@@ -30,6 +30,24 @@ class Queue:
 
         self.length += 1
 
+    def dequeue(self):
+        if self.length == 0:
+            return None
+
+        temp = self.first
+
+        if self.length == 1:
+            self.first = None
+            self.last = None
+
+        else:
+            self.first = self.first.next
+            temp.next = None
+
+        self.length -= 1
+
+        return temp
+
 
 my_queue = Queue(4)
 my_queue.print_queue()
@@ -53,5 +71,26 @@ my_queue.print_queue()
     Queue after enqueue(2):
     1
     2
+
+"""
+
+my_queue = Queue(1)
+my_queue.enqueue(2)
+
+# (2) Items - Returns 2 Node
+print(my_queue.dequeue().value)
+# (1) Item -  Returns 1 Node
+print(my_queue.dequeue().value)
+# (0) Items - Returns None
+print(my_queue.dequeue())
+
+
+
+"""
+    EXPECTED OUTPUT:
+    ----------------
+    1
+    2
+    None
 
 """
