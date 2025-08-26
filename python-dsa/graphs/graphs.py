@@ -19,22 +19,45 @@ class Graph:
             return True
         return False
 
+    def remove_edge(self, v1, v2):
+        if v1 in self.adj_list.keys() and v2 in self.adj_list.keys():
+            try:
+                self.adj_list[v1].remove(v2)
+                self.adj_list[v2].remove(v1)
+            except ValueError:
+                pass
+            return True
+        return False
+
 
 my_graph = Graph()
+my_graph.add_vertex('A')
+my_graph.add_vertex('B')
+my_graph.add_vertex('C')
 
-my_graph.add_vertex(1)
-my_graph.add_vertex(2)
+my_graph.add_edge('A', 'B')
+my_graph.add_edge('B', 'C')
+my_graph.add_edge('C', 'A')
 
-my_graph.add_edge(1,2)
-
+print('Graph before remove_edge():')
 my_graph.print_graph()
 
+my_graph.remove_edge('A', 'C')
 
+print('\nGraph after remove_edge():')
+my_graph.print_graph()
 
 """
     EXPECTED OUTPUT:
     ----------------
-    1 : [2]
-    2 : [1]
+    Graph before remove_edge():
+    A : ['B', 'C']
+    B : ['A', 'C']
+    C : ['B', 'A']
+
+    Graph after remove_edge():
+    A : ['B']
+    B : ['A', 'C']
+    C : ['B']
 
 """
