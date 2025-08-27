@@ -25,6 +25,18 @@ class MaxHeap:
             self._swap(current, self._parent(current))
             current = self._parent(current)
 
+    def remove(self):
+        if len(self.heap) == 0:
+            return None
+        if len(self.heap) == 1:
+            return self.heap.pop()
+
+        max_value = self.heap[0]
+        self.heap[0] = self.heap.pop()
+        self._sink_down(0)
+
+        return max_value
+
 
 my_heap = MaxHeap()
 my_heap.insert(99)
@@ -48,5 +60,35 @@ print(my_heap.heap)
     [99, 72, 61, 58]
     [100, 99, 61, 58, 72]
     [100, 99, 75, 58, 72, 61]
+
+"""
+
+print("-" * 30)
+
+my_heap = MaxHeap()
+my_heap.insert(95)
+my_heap.insert(75)
+my_heap.insert(80)
+my_heap.insert(55)
+my_heap.insert(60)
+my_heap.insert(50)
+my_heap.insert(65)
+
+print(my_heap.heap)
+
+my_heap.remove()
+
+print(my_heap.heap)
+
+my_heap.remove()
+
+print(my_heap.heap)
+
+"""
+    EXPECTED OUTPUT:
+    ----------------
+    [95, 75, 80, 55, 60, 50, 65]
+    [80, 75, 65, 55, 60, 50]
+    [75, 60, 65, 55, 50]
 
 """
