@@ -1,3 +1,6 @@
+from graphs.graphs import my_graph
+
+
 class MaxHeap:
     def __init__(self):
         self.heap = []
@@ -13,3 +16,37 @@ class MaxHeap:
 
     def _swap(self, index1, index2):
         self.heap[index1], self.heap[index2] = self.heap[index2], self.heap[index1]
+
+    def insert(self, value):
+        self.heap.append(value)
+        current = len(self.heap) - 1
+
+        while current > 0 and self.heap[current] > self.heap[self._parent(current)]:
+            self._swap(current, self._parent(current))
+            current = self._parent(current)
+
+
+my_heap = MaxHeap()
+my_heap.insert(99)
+my_heap.insert(72)
+my_heap.insert(61)
+my_heap.insert(58)
+
+print(my_heap.heap)
+
+my_heap.insert(100)
+
+print(my_heap.heap)
+
+my_heap.insert(75)
+
+print(my_heap.heap)
+
+"""
+    EXPECTED OUTPUT:
+    ----------------
+    [99, 72, 61, 58]
+    [100, 99, 61, 58, 72]
+    [100, 99, 75, 58, 72, 61]
+
+"""
