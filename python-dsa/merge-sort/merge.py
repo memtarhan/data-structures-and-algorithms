@@ -1,4 +1,4 @@
-def merge(list1, list2):
+def merge_lists(list1, list2):
     combined = []  # initialize an empty list to store the merged result
     i = 0  # initialize the index of list1 to zero
     j = 0  # initialize the index of list2 to zero
@@ -24,7 +24,7 @@ def merge(list1, list2):
     return combined  # return the merged and sorted list
 
 
-print(merge([1, 2, 7, 8], [3, 4, 5, 6]))
+print(merge_lists([1, 2, 7, 8], [3, 4, 5, 6]))
 
 """
     EXPECTED OUTPUT:
