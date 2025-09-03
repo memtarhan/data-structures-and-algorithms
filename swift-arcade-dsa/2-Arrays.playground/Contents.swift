@@ -24,7 +24,7 @@ import UIKit
  9 ---> initial index=2 final index=0
  7 ---> initial index=3 final index=2
  6 ---> initial index=4 final index=2
- 
+
  */
 func solution(A: [Int], K: Int) -> [Int] {
     var newArr = A
@@ -41,6 +41,37 @@ func solution(A: [Int], K: Int) -> [Int] {
 
     return newArr
 }
+
+/*
+ Rotate left 3 times
+
+ [3, 8, 9, 7, 6] => [7, 6, 3, 8, 9]
+
+ 3 ---> initial index=0 final index=2
+ 8 ---> initial index=1 final index=3
+ 9 ---> initial index=2 final index=4
+ 7 ---> initial index=3 final index=0
+ 6 ---> initial index=4 final index=1
+
+ */
+
+func rotateLeft(d: Int, arr: [Int]) -> [Int] {
+    var newArr = arr
+    var count = arr.count
+    var actualRotationCount = d % count
+
+    for index in 0 ..< count {
+        var newIndex = index - actualRotationCount
+        if newIndex < 0 {
+            newIndex = newIndex + count
+        }
+        newArr[newIndex] = arr[index]
+    }
+
+    return newArr
+}
+
+rotateLeft(d: 3, arr: [3, 8, 9, 7, 6])
 
 solution(A: [1, 2, 3, 4, 5], K: 1) // 5 1 2 3 4
 solution(A: [1, 2, 3, 4, 5], K: 2) // 4 5 1 2 3
