@@ -47,3 +47,32 @@ solution(A: [1, 2, 3, 4, 5], K: 2) // 4 5 1 2 3
 solution(A: [1, 2, 3, 4, 5], K: 3) // 3 4 5 1 2
 
 solution(A: [3, 8, 9, 7, 6], K: 13) // [9, 7, 6, 3, 8]
+
+func solution2(A: [Int], K: Int) -> [Int] {
+    guard !A.isEmpty else { return A }
+    guard K > 0 else { return A }
+
+    var result = A
+    for _ in 1 ... K {
+        result = rotateRightOnce(A: result)
+    }
+
+    return result
+}
+
+func rotateRightOnce(A: [Int]) -> [Int] {
+    var newArr = Array<Int>(repeating: 0, count: A.count)
+
+    for i in 0 ..< A.count - 1 {
+        newArr[i + 1] = A[i]
+    }
+    newArr[0] = A.last!
+
+    return newArr
+}
+
+solution2(A: [1, 2, 3, 4, 5], K: 1) // 5 1 2 3 4
+solution2(A: [1, 2, 3, 4, 5], K: 2) // 4 5 1 2 3
+solution2(A: [1, 2, 3, 4, 5], K: 3) // 3 4 5 1 2
+
+solution2(A: [3, 8, 9, 7, 6], K: 13) // [9, 7, 6, 3, 8]
