@@ -55,6 +55,23 @@ class LinkedList {
         return temp
     }
 
+    func insert(position: Int, data: Int) {
+        if position == 0 {
+            addFront(data)
+            return
+        }
+
+        let newNode = Node(data)
+        var currentNode = head
+
+        for _ in 0 ..< position - 1 {
+            currentNode = currentNode?.next
+        }
+
+        newNode.next = currentNode?.next
+        currentNode?.next = newNode
+    }
+
     func printLinkedList() {
         if head == nil { return }
 
@@ -93,3 +110,6 @@ if let first = linkedList.getFirst() {
 if let last = linkedList.getLast() {
     print(last.data)
 }
+
+linkedList.insert(position: 2, data: 5)
+linkedList.printLinkedList()
