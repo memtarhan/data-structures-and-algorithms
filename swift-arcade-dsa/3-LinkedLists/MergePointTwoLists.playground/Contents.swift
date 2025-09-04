@@ -54,7 +54,24 @@ func findMerge(headA: Node?, headB: Node?) -> Int? {
 }
 
 func findMergeBruteForce(headA: Node?, headB: Node?) -> Int? {
-    // Here...
+    let m = length(headA) // O(m)
+    let n = length(headB) // O(n)
+
+    var currentA = headA
+
+    for _ in 0 ..< m { // O(m)
+        var currentB = headB
+        for _ in 0 ..< n { // O(n)
+            let A = currentA?.data
+            let B = currentB?.data
+            print("A: \(A ?? 0) - B: \(B ?? 0)")
+            if A == B { return A }
+            currentB = currentB?.next
+        }
+
+        currentA = currentA?.next
+    }
+
     return nil
 }
 
@@ -73,4 +90,4 @@ let node10 = Node(10, node11)
 printLinkedList(node1)
 printLinkedList(node10)
 
-findMerge(headA: node1, headB: node10)
+findMergeBruteForce(headA: node1, headB: node10)
