@@ -15,10 +15,24 @@ import Foundation
 
  Answer should be correct. Don't worry about performance.
  */
-
 public func solution(_ A : [String], _ B : [String], _ P : String) -> String {
-    // do your work here
-    return ""
+    var result = [String]()
+    
+    // loop through looking for match - when found add to result
+    for i in 0..<B.count {
+        if B[i].contains(P) {
+            result.append(A[i])
+        }
+    }
+    
+    if result.count == 0 {
+        return "NO CONTACT"
+    } else if result.count == 1 {
+        return result.first!
+    }
+    
+    // sort and return first
+    return result.sorted().first!
 }
 
 let A = ["pim", "pom"]
@@ -34,8 +48,27 @@ solution([String](), [String](), "")
 solution(A, B, "")
 
 public func solutionDict(_ A : [String], _ B : [String], _ P : String) -> String {
-    // 🕹 Game on here
-    return ""
+
+    // Create a dictionary of name / numbers
+    var dict = [String: String]()
+    
+    for i in 0..<A.count {
+        dict[A[i]] = B[i]
+    }
+    
+    // look for matches
+    let matches = dict.filter { $0.value.contains(P) }
+    
+    if matches.count == 0 {
+        return "NO CONTACT"
+    } else if matches.count == 1 {
+        return matches.first!.key
+    }
+    
+    // sort by key
+    let sortedKeys = matches.keys.sorted()
+    
+    return sortedKeys.first!
 }
 
 
