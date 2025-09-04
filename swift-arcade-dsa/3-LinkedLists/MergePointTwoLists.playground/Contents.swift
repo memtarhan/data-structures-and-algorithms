@@ -49,7 +49,40 @@ func printLinkedList(_ head: Node?) {
 }
 
 func findMerge(headA: Node?, headB: Node?) -> Int? {
-    // Here...
+    // Figure out which is longer
+    // Swap if necessary
+
+    // Calculate d
+    // Walk d for longer
+    // Walk remainder for both
+    let m = length(headA) // O(m)
+    let n = length(headB) // O(n)
+
+    var currentA = headA
+    var currentB = headB
+
+    if n > m {
+        let temp = currentA
+        currentA = currentB
+        currentB = temp
+    }
+
+    let d = abs(m - n)
+
+    for _ in 1 ... d { // O(n)
+        currentA = currentA?.next
+    }
+
+    for _ in 0 ... n - 1 { // O(n)
+        print(4)
+        let A = currentA?.data
+        let B = currentB?.data
+        if A == B {
+            return A
+        }
+        currentA = currentA?.next
+        currentB = currentB?.next
+    }
     return nil
 }
 
@@ -115,5 +148,7 @@ let node10 = Node(10, node11)
 printLinkedList(node1)
 printLinkedList(node10)
 
+
+findMerge(headA: node1, headB: node10)
 findMergeBruteForce(headA: node1, headB: node10)
 findMergeSpaceTime(headA: node1, headB: node10)
