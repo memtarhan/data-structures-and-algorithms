@@ -110,6 +110,10 @@ class LinkedList {
 
     var isEmpty: Bool { head == nil }
 
+    func clear() {
+        head = nil
+    }
+
     func printLinkedList() {
         if head == nil { return }
 
@@ -172,4 +176,8 @@ linkedList2.printLinkedList()
 
 print("delete")
 linkedList2.delete(position: 2)
+linkedList2.printLinkedList()
+
+print("clear")
+linkedList2.clear()
 linkedList2.printLinkedList()
