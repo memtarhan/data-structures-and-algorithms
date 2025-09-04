@@ -25,7 +25,17 @@ class Node {
 }
 
 func hasCycle(first: Node) -> Bool {
-    // here...
+    var slow: Node? = first
+    var fast: Node? = first 
+
+    while fast != nil && fast?.next != nil {
+        slow = slow?.next
+        fast = fast?.next?.next
+
+        if slow?.data == fast?.data {
+            return true
+        }
+    }
     return false
 }
 
