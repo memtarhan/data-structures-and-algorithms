@@ -55,6 +55,7 @@ class LinkedList {
         return temp
     }
 
+    // O(n)
     func insert(position: Int, data: Int) {
         if position == 0 {
             addFront(data)
@@ -71,6 +72,43 @@ class LinkedList {
         newNode.next = currentNode?.next
         currentNode?.next = newNode
     }
+
+    // O(1)
+    func deleteFirst() {
+        head = head?.next
+    }
+
+    // O(n)
+    func deleteLast() {
+        if head == nil { return }
+
+        var previousNode: Node?
+        var nextNode = head
+
+        while nextNode?.next != nil {
+            previousNode = nextNode
+            nextNode = nextNode?.next
+        }
+
+        previousNode?.next = nil
+    }
+
+    // O(n)
+    func delete(position: Int) {
+        if head == nil { return }
+
+        var previousNode: Node?
+        var nextNode = head
+
+        for _ in 0 ..< position {
+            previousNode = nextNode
+            nextNode = nextNode?.next
+        }
+
+        previousNode?.next = nextNode?.next
+    }
+
+    var isEmpty: Bool { head == nil }
 
     func printLinkedList() {
         if head == nil { return }
@@ -111,5 +149,27 @@ if let last = linkedList.getLast() {
     print(last.data)
 }
 
+print("insert")
 linkedList.insert(position: 2, data: 5)
 linkedList.printLinkedList()
+
+print("deleteFirst")
+linkedList.deleteFirst()
+linkedList.printLinkedList()
+
+print("deleteLast")
+linkedList.deleteLast()
+linkedList.printLinkedList()
+
+print("------------------")
+let linkedList2 = LinkedList()
+linkedList2.addFront(5)
+linkedList2.addFront(4)
+linkedList2.addFront(3)
+linkedList2.addFront(2)
+linkedList2.addFront(1)
+linkedList2.printLinkedList()
+
+print("delete")
+linkedList2.delete(position: 2)
+linkedList2.printLinkedList()
