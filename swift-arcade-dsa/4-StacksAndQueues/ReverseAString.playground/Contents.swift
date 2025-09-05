@@ -8,8 +8,14 @@ import UIKit
  */
 
 func solution(_ text: String) -> String {
-    // Do your work here...
-    return ""
+    var arr = Array(text)
+    var result = ""
+    
+    for _ in 0 ..< arr.count {
+        result += String(arr.removeLast())
+    }
+    
+    return result
 }
 
 solution("abc") // bca
