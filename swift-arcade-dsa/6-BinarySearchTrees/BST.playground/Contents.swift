@@ -17,6 +17,15 @@ class Node {
     init(_ key: Int) {
         self.key = key
     }
+
+    var min: Node {
+        if let left {
+            return left.min
+
+        } else {
+            return self
+        }
+    }
 }
 
 class BST {
