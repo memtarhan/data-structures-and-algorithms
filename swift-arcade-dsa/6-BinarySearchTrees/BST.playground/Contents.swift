@@ -23,10 +23,23 @@ class BST {
     var root: Node?
 
     func insert(key: Int) {
+        root = insertItem(root, key)
     }
 
     private func insertItem(_ node: Node?, _ key: Int) -> Node {
-        return Node(key)
+        guard let node else {
+            return Node(key)
+        }
+
+        if key < node.key {
+            node.left = insertItem(node.left, key)
+        }
+
+        if key > node.key {
+            node.right = insertItem(node.right, key)
+        }
+
+        return node
     }
 
     func find(key: Int) -> Int? {
