@@ -1,18 +1,20 @@
 import UIKit
 
 /*
-  ___                   _        _   _
- | _ \___ _ _ _ __ _  _| |_ __ _| |_(_)___ _ _  ___
- |  _/ -_) '_| '  \ || |  _/ _` |  _| / _ \ ' \(_-<
- |_| \___|_| |_|_|_\_,_|\__\__,_|\__|_\___/_||_/__/
+ _   _ ___ _    _  __
+| | | | _ \ |  (_)/ _|_  _
+| |_| |   / |__| |  _| || |
+ \___/|_|_\____|_|_|  \_, |
+                      |__/
 
-  Challenge: Given two strings, check if one is a permutation of the other.
+  Challenge: See if you can replace all the spaces in a a string with the
+  ASCII symbol for space '%20'. Assume you are given the length of the final
+  string. Hint: Use array of char[].
 
-  */
+ */
 
-func isPermutation(_ text: String, _ perm: String) -> Bool {
-    return false
+func urlify(_ url: String, length: Int) -> String {
+    return ""
 }
 
-isPermutation("abc", "cba") // true
-isPermutation("abc", "xyz") // false
+urlify("My Home Page    ", length: 16) // "My%20Home%20Page"
