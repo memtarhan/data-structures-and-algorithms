@@ -11,7 +11,8 @@ import UIKit
   */
 
 func isPermutation(_ text: String, _ perm: String) -> Bool {
-    return false
+    if text.count != perm.count { return false }
+    return text.sorted() == perm.sorted()
 }
 
 isPermutation("abc", "cba") // true
