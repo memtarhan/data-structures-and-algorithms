@@ -1,3 +1,20 @@
+func split(word: String, into parts: Int = 3) -> [String] {
+    var result = [String]()
+    var array = Array(word)
+
+    var pointer = 0
+
+    while pointer + parts <= array.count {
+        let string = String(array[pointer ..< pointer + parts])
+        result.append(string)
+        pointer += parts
+    }
+
+    return result
+}
+
+print(split(word: "SOSSOSSOS"))
+
 func findDifference(s1: String, s2: String) -> Int {
     var s1Dict: [Character: Int] = [:]
 
@@ -50,9 +67,21 @@ func marsExploration(s: String) -> Int {
         expectedMessage.append("SOS")
     }
 
-    let difference = findDifference(s1: expectedMessage, s2: s)
+    var result = 0
+    let expectedMessageParts = split(word: expectedMessage)
+    let receivedMessageParts = split(word: s)
 
-    return difference
+    for (expected, received) in zip(expectedMessageParts, receivedMessageParts) {
+        if !(expected == received) {
+            for (e, r) in zip(Array(expected), Array(received)) {
+                if e != r {
+                    result += 1
+                }
+            }
+        }
+    }
+
+    return result
 }
 
 print(marsExploration(s: "SOSSPSSQSSOR")) // 3
