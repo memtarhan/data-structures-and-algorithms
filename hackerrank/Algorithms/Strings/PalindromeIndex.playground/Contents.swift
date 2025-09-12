@@ -6,21 +6,48 @@
  */
 
 func palindromeIndex(s: String) -> Int {
+    print(s)
     let array = Array(s)
     let count = array.count
     var results = [Int]()
+    var result = -1
 
-    for index in array.indices {
-        if array[index] != array[count - index - 1] {
-            results.append(index)
+    for index in 0 ..< count / 2 {
+        let left = array[index]
+        let right = array[count - index - 1]
+
+        if left != right {
+            if index + 1 < count && count - index - 2 >= 0 {
+                // temporarily drop left value
+                let newLeft = array[index + 1]
+                let newRight = array[count - index - 2]
+                if newLeft == right {
+                    result = index
+                    results.append(index)
+//                    break
+
+                } else if newRight == left {
+                    result = count - index - 1
+                    results.append(count - index - 1)
+//                    break
+                }
+            }
         }
     }
 
-    if results.isEmpty || results.count > 1 { return -1 }
-    return results[0]
+    print(results)
+    return result
+
+//    if results.isEmpty { return -1 }
+//    return results[0]
 }
 
+// palindromeIndex(s: "aaab") // 3
+// palindromeIndex(s: "baa") // 0
+// palindromeIndex(s: "aaa") // -1
 
-//palindromeIndex(s: "aaab") // 3
-//palindromeIndex(s: "baa") // 0
-palindromeIndex(s: "aaa") // -1
+// palindromeIndex(s: "quyjjdcgsvvsgcdjjyq") // 1
+// palindromeIndex(s: "hgygsvlfwcwnswtuhmyaljkqlqjjqlqkjlaymhutwsnwcflvsgygh") // 8
+// palindromeIndex(s: "fgnfnidynhxebxxxfmxixhsruldhsaobhlcggchboashdlurshxixmfxxxbexhnydinfngf") // 33
+
+palindromeIndex(s: "hgygsvlfcwnswtuhmyaljkqlqjjqlqkjlaymhutwsnwcwflvsgygh") // 44
