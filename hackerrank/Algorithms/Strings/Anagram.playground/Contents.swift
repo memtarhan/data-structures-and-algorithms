@@ -16,37 +16,19 @@ func anagram(s: String) -> Int {
     var leftHalf = Array(arr[0 ..< arr.count / 2])
     var rightHalf = Array(arr[arr.count / 2 ..< arr.count])
 
-    leftHalf.sort()
-    rightHalf.sort()
+    // Removed sorting because of performance and findDifference(:_) function
+    // already takes care of all the characters regardless sorting
+//    leftHalf.sort()
+//    rightHalf.sort()
 
+    let s1 = String(leftHalf)
+    let s2 = String(rightHalf)
     // Check if halves are anagrams, then no change is required and return 0
-    if String(leftHalf) == String(rightHalf) {
-        return 0
-    }
-
-//    var changeCounter = 0
-//    var rightValuesDict = [Character: Int]()
-//    for value in rightHalf {
-//        if rightValuesDict[value] == nil {
-//            rightValuesDict[value] = 1
-//
-//        } else {
-//            rightValuesDict[value]! += 1
-//        }
-//    }
-//
-//    for value in leftHalf {
-//    }
-//    for index in leftHalf.indices {
-//        let leftChar = leftHalf[index]
-//        let rightChar = rightHalf[index]
-//
-//        if !(leftChar == rightChar) {
-//            changeCounter += 1
-//        }
+//    if s1 == s2 {
+//        return 0
 //    }
 
-    return findDifference(s1: String(leftHalf), s2: String(rightHalf))
+    return findDifference(s1: s1, s2: s2)
 }
 
 // anagram(s: "aaabbb") // 3
@@ -55,7 +37,7 @@ func anagram(s: String) -> Int {
 // anagram(s: "mnop") // 2
 // anagram(s: "xyyx") // 0
 // anagram(s: "xaxbbbxx") // 1
-anagram(s: "fdhlvosfpafhalll") // 5
+// anagram(s: "fdhlvosfpafhalll") // 5
 
 // anagram(s: "hhpddlnnsjfoyxpciioigvjqzfbpllssuj") // 10
 
@@ -69,7 +51,7 @@ func findDifference(s1: String, s2: String) -> Int {
 
         s1Dict[character]! += 1
     }
-    
+
     var s2Dict: [Character: Int] = [:]
 
     for character in s2 {
@@ -79,29 +61,40 @@ func findDifference(s1: String, s2: String) -> Int {
 
         s2Dict[character]! += 1
     }
-    
-    print(s1Dict)
-    print(s2Dict)
-    
-    for (key, value) in s2Dict {
+
+    for key in s2Dict.keys {
         if s1Dict[key] != nil {
-            s2Dict[key]! -= s1Dict[key]!
-            s1Dict[key] = 0
+            // check if values are equal, if so, value should be set to 0
+            if s1Dict[key] == s2Dict[key] {
+                s1Dict[key] = 0
+                s2Dict[key] = 0
+
+            } else if s1Dict[key]! > s2Dict[key]! { // s2 value shoul be set to 0
+                s1Dict[key]! -= s2Dict[key]!
+                s2Dict[key] = 0
+
+            } else if s1Dict[key]! < s2Dict[key]! { // s1 value shoul be set to 0
+                s2Dict[key]! -= s1Dict[key]!
+                s1Dict[key] = 0
+            }
         }
-//        print("key: \(key) --- value in s2Dict: \(value) and value in s1Dict: \(s1Dict[key])")
     }
-    
-    print(s1Dict)
-    print(s2Dict)
-    
+
     let s1Total = s1Dict.values.reduce(0, +)
     let s2Total = s2Dict.values.reduce(0, +)
-    
+
     if s1Total == s2Total {
         return s1Total
     }
-    
+
     return -1
 }
 
-//findDifference(s1: "xaxb", s2: "bbxx")
+// let s = "fdhlvosfpafhalll"
+// let arr = Array(s)
+// let s1 = String(Array(arr[0 ..< arr.count / 2]))
+// let s2 = String(Array(arr[arr.count / 2 ..< arr.count]))
+//
+// findDifference(s1: s1, s2: s2)
+
+// findDifference(s1: "xaxb", s2: "bbxx")
