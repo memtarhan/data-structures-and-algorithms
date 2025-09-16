@@ -6,36 +6,23 @@
  */
 
 func hackerrankInString(s: String) -> String {
-    let specialWord = "hackerrank"
+    // Let's go with subsequence logic
 
-    return "NO"
-}
+    let sequence = Array("hackerrank")
+    let array = Array(s)
 
-fileprivate func getNext(letter: Character, in string: String) -> Character? {
-    let array = Array(string)
-    if let firstIndex = array.firstIndex(of: letter) {
-        return array[firstIndex]
-    }
-    return nil
-}
-
-fileprivate func checkIfContains(letter: Character,
-                                 nextLetter: Character,
-                                 string: String) -> Int {
-    let array = Array(string)
-
-    for index in 0 ..< array.count - 1 {
-        let current = array[index]
-        let next = array[index + 1]
-
-        if current == letter && (next == letter || next == nextLetter) {
-            return index
+    var sequencePointer = 0
+    for character in array {
+        if sequencePointer == sequence.count {
+            break
+        }
+        if character == sequence[sequencePointer] {
+            sequencePointer += 1
         }
     }
 
-    return -1
+    return sequencePointer == sequence.count ? "YES" : "NO"
 }
 
 let string = "haaacckkerrannkk"
-checkIfContains(letter: "h", nextLetter: "a", string: string) // 1
-checkIfContains(letter: "a", nextLetter: "c", string: string) // 2
+hackerrankInString(s: string)
