@@ -14,6 +14,8 @@ true
 """
 
 
+# Time = O(n)
+# Space = O(1)
 def is_valid_subsequence(array, sequence):
     array_pointer = 0
     sequence_pointer = 0
@@ -29,6 +31,8 @@ def is_valid_subsequence(array, sequence):
     return sequence_pointer == len(sequence)
 
 
+# Time = O(n)
+# Space = O(1)
 def is_valid_subsequence_2(array, sequence):
     sequence_pointer = 0
 
