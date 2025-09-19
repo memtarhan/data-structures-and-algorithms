@@ -46,16 +46,12 @@ def birthday(s, d, m):
 
         if sub_sum == d:
             segments_count += 1
-            if m - 1 > 0:
-                pointer += m - 1
-            else:
-                pointer += 1
-        else:
-            pointer += 1
+        pointer += 1
 
     return segments_count
 
 
 if __name__ == '__main__':
-    count = birthday([4], 4, 1)
-    print(count)
+    arr = [2, 5, 1, 3, 4, 4, 3, 5, 1, 1, 2, 1, 4, 1, 3, 3, 4, 2, 1]
+    count = birthday(arr, 18, 7)
+    print(count) # 3
