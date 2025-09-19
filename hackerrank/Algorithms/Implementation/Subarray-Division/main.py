@@ -34,24 +34,28 @@ import sys
 #
 
 def birthday(s, d, m):
-    values = {}
-    for item in s:
-        if item not in values:
-            values[item] = 0
-        values[item] += 1
-
-
     segments_count = 0
 
-    sub = []
-    for i in range(m):
-        
+    pointer = 0
 
-    print(values)
+    while pointer <= len(s) - m:
+        end_pointer = pointer + m
+
+        sub = s[pointer: end_pointer]
+        sub_sum = sum(sub)
+
+        if sub_sum == d:
+            segments_count += 1
+            if m - 1 > 0:
+                pointer += m - 1
+            else:
+                pointer += 1
+        else:
+            pointer += 1
 
     return segments_count
 
 
 if __name__ == '__main__':
-    birthday([2, 2, 1, 3, 2], 4, 2)
-
+    count = birthday([4], 4, 1)
+    print(count)
