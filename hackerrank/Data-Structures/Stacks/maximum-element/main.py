@@ -1,24 +1,13 @@
 class Stack:
-    def __init__(self, max_stack=None):
+    def __init__(self):
         self.data = []
-        self.max_stack = max_stack
 
     def push(self, item):
         self.data.append(item)
-        if self.max_stack is not None:
-            self.max_stack.push(item)
-
-        else:
-            if self.max_stack.peek() is not None:
-                if self.max_stack.peek() < item:
-                    self.max_stack.push(item)
-            else:
-                self.max_stack.push(item)
 
     def delete(self):
         item = self.data.pop()
-        if item == self.max_stack.peek():
-            self.max_stack.pop()
+        return item
 
     def peek(self):
         if len(self.data) > 0:
@@ -26,13 +15,10 @@ class Stack:
         else:
             return None
 
-    def get_max(self):
-        return self.max_stack.peek()
-
 
 def get_max(operations):
     max_stack = Stack()
-    stack = Stack(max_stack=max_stack)
+    stack = Stack()
 
     for operation in operations:
         parts = operation.split(" ")
@@ -42,14 +28,28 @@ def get_max(operations):
             # push item
             item = int(parts[1])
             stack.push(item)
+
+            top_value = max_stack.peek()
+
+            if top_value:
+                if top_value < item:
+                    max_stack.push(item)
+            else:
+                max_stack.push(item)
+
         elif operation_type == 2:
             # delete
-            stack.delete()
+            value = stack.delete()
+            top_value = max_stack.peek()
+
+            if value == top_value:
+                max_stack.delete()
+
         elif operation_type == 3:
             # get max
-            print(stack.get_max())
+            print(max_stack.peek())
 
 
 if __name__ == '__main__':
-    operations = ['1 97', '2', '1 20', '2', '1 26', '1 20', '2', '3', '1 91', 3]
-    get_max(operations)
+    ops = ['1 97', '2', '1 20', '2', '1 26', '1 20', '2', '3', '1 91', '3']
+    get_max(ops)
