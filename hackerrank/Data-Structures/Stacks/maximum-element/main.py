@@ -28,16 +28,16 @@ def get_max(operations):
 
         if operation_type == 1:
             # push item
-            item = int(parts[1])
-            stack.push(item)
+            value = int(parts[1])
+            stack.push(value)
 
             top_value = max_stack.peek()
 
             if top_value:
-                if top_value < item:
-                    max_stack.push(item)
+                if top_value < value:
+                    max_stack.push(value)
             else:
-                max_stack.push(item)
+                max_stack.push(value)
 
         elif operation_type == 2:
             # delete
@@ -50,6 +50,8 @@ def get_max(operations):
         elif operation_type == 3:
             # get max
             max_value = max_stack.peek()
+            if max_value == 69:
+                print("found!")
             if max_value:
                 max_data.append(max_value)
 
@@ -70,4 +72,5 @@ if __name__ == '__main__':
 
     res = get_max(ops)
 
-    print(res)
+    for item in res:
+        print(item)
